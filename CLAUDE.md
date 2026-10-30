@@ -15,7 +15,7 @@ B2B SaaS platform that matches business requirements ("requirements") with solut
     - Each search makes **two parallel calls**, one ranked by DISTANCE and one by POPULARITY (20 results each), and merges them by id: up to 40 results that cover the whole radius.
     - Verified: 40 results from 0.15 to 4.8 km for Banjara Hills, 5 km, food.
     - **Quality filter** (the user's request, 2026-10-30): the backend drops any place that isn't `OPERATIONAL`. The Location page hides "low-information" Google listings by default (`isLowInformation`: no rating, fewer than `MIN_REVIEWS` = 5 reviews, or no address). A note shows the count with a "Show them" toggle. It runs client-side, at no extra API cost. Verified: 31 shown and 4 hidden for Banjara Hills, 5 km, food.
-  - **Database:** Supabase, reached through its **Data API over HTTPS** (`db/supabase.ts` → `rest()`) with the server-only service_role key. A direct Postgres connection is impossible from this laptop (see the corporate network note).
+  - **Database:** Supabase, reached through its **Data API over HTTPS** (`db/supabase.ts` → `rest()`) with the server-only service_role key. The app never opens a direct Postgres connection, so it also works on networks that block ports 5432/6543.
     - The schema is `db/migrations/0002_supabase_schema.sql`: `users`, `seeker_profiles`, `saved_opportunities` and `search_history`.
     - The user runs it manually in Supabase's SQL Editor; the Data API can't run DDL.
     - RLS is on with no policies, so only the secret key can access the tables.
@@ -48,17 +48,14 @@ B2B SaaS platform that matches business requirements ("requirements") with solut
     - **D13, lead tracker:** `saved_opportunities` gets `status` (new, contacted, replied, won, lost), `notes` and `follow_up_on` through migration `0003_lead_tracker.sql`, **which the user must run**. `PATCH /api/seeker/saved/:itemId` updates them.
       - The Saved page has status tabs with counts, a status dropdown on each row, follow-up labels (overdue or today), and a `LeadTrackerPanel` in the details drawer (`extra` prop on `BusinessDrawer` and `PostingDrawer`).
       - Before the migration, saving a change returns a 503 that names the migration file.
-  - **Corporate network:** RealPage's Prisma TLS inspection runs on the laptop itself, on any network.
-    - Direct Postgres traffic (ports 5432/6543) is silently dropped.
-    - HTTPS works once Node trusts the RealPage Root CA. The user env var `NODE_EXTRA_CA_CERTS` points to `C:\Users\DNagirimadugu\.certs\realpage-root-ca.pem`.
-    - Processes started from Claude Code need `$env:NODE_EXTRA_CA_CERTS` set explicitly, because Claude Code's environment predates that variable.
+  - **Networks with TLS inspection:** Node must trust the inspecting root certificate through the `NODE_EXTRA_CA_CERTS` OS environment variable (see `backend/.env.example`). Machine-specific details live in `CLAUDE.local.md`, which is not committed.
   - `npm audit` flags `tar` through bcrypt 5's install-time `node-pre-gyp`. bcrypt 6 fixes it, but that upgrade hasn't been approved yet.
   - **Google terms:** Places results must not be displayed on a non-Google map. The user approved (2026-10-27) showing Google results on a Google map.
     - `components/GoogleOpportunityMap.tsx` loads the Maps JavaScript API with a script tag (no npm package) and draws advanced markers, a circle and an InfoWindow.
     - It's lazy-loaded. `LocationOpportunitiesPage` picks the map from the source of the results on screen.
     - It needs `VITE_GOOGLE_MAPS_BROWSER_KEY` in `frontend/.env.local`. That's a public browser key, restricted to localhost and the Maps JavaScript API. `VITE_GOOGLE_MAPS_MAP_ID` is optional and defaults to `DEMO_MAP_ID`.
     - The Google map is **not yet verified with a real key**. Without the key, Google results show as a full-width list (`bi-locate__body--list`) with no map panel.
-- No git repo yet.
+- Git repo: pushed to GitHub (personal account). Secrets, `.claude/` and `CLAUDE.local.md` are not committed.
 
 ## Commands (run from `frontend/`)
 

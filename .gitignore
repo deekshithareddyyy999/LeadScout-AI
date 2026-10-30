@@ -8,3 +8,5 @@ dist/
 # Local only: Claude Code settings and a stray screenshot
 .claude/
 /-
+CLAUDE.local.md
+.vite/
