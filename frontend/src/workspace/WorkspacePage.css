@@ -1,0 +1,356 @@
+/* Workspace picker: "How will you use LeadScout?" Two whole-card choices; the art panels echo the landing hero
+   (Indigo #4B0082, lavender = website listed, amber = no website listed). */
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: var(--color-bg);
+}
+
+.workspace__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 3vh, 40px);
+  padding: clamp(16px, 3vh, 56px) 28px;
+}
+
+.workspace__intro {
+  text-align: center;
+}
+
+.workspace__title {
+  font-family: var(--font-serif);
+  font-size: clamp(34px, 5vh, 48px);
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.workspace__subtitle {
+  margin-top: 10px;
+  color: var(--color-text-muted);
+  font-size: 16px;
+}
+
+.workspace__choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 420px));
+  gap: 24px;
+}
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  text-align: left;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.choice:hover,
+.choice:focus-visible {
+  border-color: var(--color-primary-strong-line, #d0b5ea);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -24px rgba(75, 0, 130, 0.45);
+}
+
+.choice:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 14px;
+}
+
+.choice__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px 24px 22px;
+}
+
+.choice__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.choice__title {
+  margin-top: 8px;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+}
+
+.choice__description {
+  margin-top: 8px;
+  color: var(--color-text-muted);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.choice__points {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0 18px;
+}
+
+.choice__point {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.choice__point svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-primary);
+}
+
+.choice__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  margin-top: auto;
+  border-radius: 6px;
+  background: var(--color-carbon);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 160ms ease;
+}
+
+.choice:hover .choice__cta,
+.choice:focus-visible .choice__cta {
+  background: var(--color-sidebar, #4b0082);
+}
+
+/* ---------- Art panels ---------- */
+
+.choice-art {
+  position: relative;
+  height: clamp(112px, 16vh, 150px);
+  overflow: hidden;
+  background: var(--color-sidebar, #4b0082);
+}
+
+.choice-art--business {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+}
+
+.choice-art__ticket {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 0 1 66%;
+  padding: 11px 14px;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 14px 28px -18px rgba(20, 0, 40, 0.7);
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.choice:hover .choice-art__ticket,
+.choice:focus-visible .choice-art__ticket {
+  transform: translateX(10px) rotate(-1.5deg);
+}
+
+.choice-art__kind {
+  color: var(--color-text-subtle);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.choice-art__title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.choice-art__budget {
+  color: var(--color-primary);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.choice-art__applicants {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 6px;
+}
+
+.choice-art__face {
+  width: 22px;
+  height: 22px;
+  margin-left: -7px;
+  border: 2px solid var(--color-sidebar, #4b0082);
+  border-radius: 50%;
+  background: #d0b5ea;
+}
+
+.choice-art__face:first-child {
+  margin-left: 0;
+  background: #fde68a;
+}
+
+.choice-art__face:nth-child(2) {
+  background: #fff;
+}
+
+.choice-art__count {
+  margin-left: 10px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.choice-art--seeker {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px) 0 0 / 100% 38px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px) 0 0 / 52px 100%,
+    var(--color-sidebar, #4b0082);
+}
+
+.choice-art__radius {
+  position: absolute;
+  left: 46%;
+  top: 52%;
+  width: 190px;
+  height: 190px;
+  border: 1px dashed rgba(208, 181, 234, 0.6);
+  border-radius: 50%;
+  background: rgba(111, 45, 168, 0.22);
+  transform: translate(-50%, -50%);
+  transition: transform 260ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.choice:hover .choice-art__radius,
+.choice:focus-visible .choice-art__radius {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+.choice-art__pin {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border: 2px solid var(--color-sidebar, #4b0082);
+  border-radius: 50%;
+  background: #d0b5ea;
+}
+
+.choice-art__pin--none {
+  background: #fde68a;
+}
+
+.choice-art__pin--target {
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  box-shadow: 0 0 0 4px rgba(253, 230, 138, 0.35);
+}
+
+.choice-art__chip {
+  position: absolute;
+  left: calc(44% + 14px);
+  top: calc(58% + 6px);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--color-primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px -10px rgba(20, 0, 40, 0.7);
+}
+
+/* ---------- Footer ---------- */
+
+.workspace__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 28px;
+  padding: 18px 28px 22px;
+  border-top: 1px solid var(--color-border);
+}
+
+.workspace__trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.workspace__trust-item svg {
+  color: var(--color-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .choice,
+  .choice *,
+  .choice-art__ticket,
+  .choice-art__radius {
+    transition: none !important;
+  }
+
+  .choice:hover,
+  .choice:focus-visible {
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .workspace__choices {
+    grid-template-columns: minmax(0, 520px);
+  }
+}
+
+/* Bigger wordmark on the picker (matches the landing page header); the signed-in app keeps its compact logo. */
+.workspace .topbar {
+  height: 80px;
+  padding: 0 clamp(20px, 4.5vw, 88px);
+}
+
+.workspace .brand {
+  gap: 10px;
+}
+
+.workspace .brand__name {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.workspace .brand__badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.workspace .topbar__link {
+  font-size: 15px;
+}

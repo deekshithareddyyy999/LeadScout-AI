@@ -1,0 +1,304 @@
+/* Sign-in / register: an indigo panel for the chosen side (matches the landing hero and the picker art) beside the form.
+   .segmented and .checkbox are defined here but used elsewhere too (Post Requirement, Settings) — keep them generic. */
+
+.signin {
+  display: grid;
+  grid-template-columns: minmax(380px, 0.85fr) minmax(0, 1fr);
+  min-height: 100%;
+  background: var(--color-bg);
+}
+
+/* ---------- Side panel ---------- */
+
+.signin__side {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 28px 44px 32px;
+  background: var(--color-sidebar);
+  color: #fff;
+}
+
+.signin__side-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.signin__brand {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.signin__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.signin__back:hover {
+  color: #fff;
+}
+
+.signin__pitch {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 460px;
+}
+
+.signin__as {
+  color: var(--color-primary-strong-line);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.signin__heading {
+  margin-top: 10px;
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 3.2vw, 44px);
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.signin__points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.signin__points li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 15px;
+}
+
+.signin__points svg {
+  flex-shrink: 0;
+  color: var(--color-primary-strong-line);
+}
+
+.signin__art {
+  margin-top: 30px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+}
+
+.signin__art .choice-art {
+  height: 150px;
+  background-color: #3a0066;
+}
+
+.signin__switch {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+}
+
+.signin__switch-link {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.signin__switch-link--dark {
+  color: var(--color-primary);
+}
+
+.signin__side button:focus-visible {
+  outline-color: #fff;
+}
+
+/* ---------- Form ---------- */
+
+.signin__main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+}
+
+.signin__column {
+  width: 100%;
+  max-width: 420px;
+}
+
+.signin__title {
+  font-family: var(--font-serif);
+  font-size: 34px;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.signin__subtitle {
+  margin-top: 6px;
+  color: var(--color-text-muted);
+  font-size: 15px;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-top: 18px;
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-stone);
+}
+
+.segmented__option {
+  height: 30px;
+  border-radius: 3px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.segmented__option--active {
+  background: var(--color-surface);
+  color: var(--color-carbon);
+  font-weight: 600;
+  box-shadow: 0 0 0 1px var(--color-border-strong);
+}
+
+.signin__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.signin__form .input {
+  height: 42px;
+}
+
+.signin__password {
+  position: relative;
+}
+
+.signin__password .input {
+  padding-right: 40px;
+}
+
+.signin__reveal {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  transform: translateY(-50%);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+}
+
+.signin__reveal:hover {
+  color: var(--color-text);
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-nav);
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.checkbox input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--color-primary);
+}
+
+.signin__error {
+  padding: 9px 12px;
+  border: 1px solid var(--color-danger-border);
+  border-radius: var(--radius-md);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  font-size: 12.5px;
+}
+
+.signin__submit {
+  height: 46px;
+  font-size: 15px;
+}
+
+.signin__submit:hover:not(:disabled) {
+  background: var(--color-sidebar);
+}
+
+.signin__alt {
+  margin-top: 18px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ---------- Small screens: the side panel becomes a short header ---------- */
+
+@media (max-width: 900px) {
+  .signin {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .signin__side {
+    gap: 18px;
+    padding: 18px 20px 22px;
+  }
+
+  .signin__heading {
+    font-size: 28px;
+  }
+
+  .signin__points,
+  .signin__art,
+  .signin__switch {
+    display: none;
+  }
+
+  .signin__main {
+    align-items: flex-start;
+    padding: 28px 20px 40px;
+  }
+}
+
+/* Bigger wordmark, matching the landing page and the picker. */
+.signin__brand {
+  padding: 8px 14px;
+}
+
+.signin__brand .brand {
+  gap: 10px;
+}
+
+.signin__brand .brand__name {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.signin__brand .brand__badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 17px;
+}
