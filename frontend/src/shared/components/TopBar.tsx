@@ -2,15 +2,18 @@ import type { ReactNode } from "react";
 import BrandMark from "./BrandMark";
 
 interface TopBarProps {
+  /** Rendered before the logo (the workspace menu button on phones). */
+  leading?: ReactNode;
   badge?: ReactNode;
   onBrandClick?: () => void;
   children?: ReactNode;
 }
 
-export default function TopBar({ badge, onBrandClick, children }: TopBarProps) {
+export default function TopBar({ leading, badge, onBrandClick, children }: TopBarProps) {
   return (
     <header className="topbar">
       <div className="topbar__left">
+        {leading}
         {onBrandClick ? (
           <button type="button" className="topbar__brand-button" onClick={onBrandClick} aria-label="LeadScout AI home">
             <BrandMark />

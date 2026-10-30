@@ -1974,3 +1974,122 @@ button.bi-row__main:hover .bi-row__title {
   justify-content: center;
   margin-top: 6px;
 }
+
+/* ---------- Phones and small tablets (sidebar becomes a slide-in menu at the same width; see layout.css) ---------- */
+
+@media (max-width: 900px) {
+  .bi-locate {
+    height: auto;
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .bi-locate__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .bi-searchbar {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .bi-searchbar__field--location,
+  .bi-searchbar__actions {
+    grid-column: 1 / -1;
+  }
+
+  /* List first, map underneath at a fixed height. */
+  .bi-locate__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bi-results {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .bi-mapbox {
+    height: 360px;
+  }
+}
+
+@media (max-width: 600px) {
+  .bi-form__grid,
+  .bi-apply__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bi-form__section {
+    padding: 16px;
+  }
+
+  .bi-facts > div {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+}
+
+/* Search history: each row becomes a small card (no sideways scrolling). */
+@media (max-width: 700px) {
+  .bi-table thead {
+    display: none;
+  }
+
+  .bi-table,
+  .bi-table tbody {
+    display: block;
+  }
+
+  .bi-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .bi-table td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+
+  .bi-table td:nth-child(3) {
+    flex-basis: 100%;
+    order: 1;
+  }
+
+  .bi-table td:nth-child(4)::after {
+    content: " results";
+  }
+
+  .bi-table td:last-child {
+    order: 2;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Drawer footer buttons (e.g. "View on Google Maps" + "Save opportunity") share the row instead of overflowing. */
+  .bi-drawer__foot {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
+
+  .bi-drawer__foot > .btn,
+  .bi-drawer__foot > a.btn,
+  .bi-form__buttons > .btn {
+    flex: 1 1 auto;
+  }
+
+  .bi-form__buttons {
+    flex-wrap: wrap;
+  }
+
+  /* "Analyze opportunity": text above the button rather than squeezed beside it. */
+  .bi-analysis--start {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

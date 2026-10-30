@@ -76,7 +76,7 @@ There are no tests and no linter. Typecheck, build and visual verification are t
 - **Do not invent branding.** Do not add new colors, fonts or icons when a reference or an existing token already covers it.
 - **Scope:** change only the requested screen or section. Do not replace whole pages, refactor unrelated code, or "simplify" working behavior.
 - **Data honesty:** keep mock data clearly separate. Never claim something is backend-connected unless that has been verified. No secrets in browser code. UI auth checks are not security.
-- **Target viewports:** 1366×768 and 1920×1080. Check for horizontal overflow, clipped text or buttons, nested scrolling, and oversized headers.
+- **Target viewports:** 1366×768 and 1920×1080, plus phones (390×844) since Oct 30, 2026. Check for horizontal overflow, clipped text or buttons, nested scrolling, and oversized headers.
 
 ## Required workflow for every screen task
 
@@ -240,7 +240,7 @@ Chrome is at `C:\Program Files\Google\Chrome\Application\chrome.exe`; Edge is al
   - Top bar 64px (sticky), background `#fbfbfa`.
   - Sidebar fixed at 236px in every workspace (the base rule says 208px; `.app-shell .sidebar` overrides it), with an Indigo `#4b0082` background (`--color-sidebar`) and white text. The active item is filled Grape with a 3px lavender left rule. Inside the sidebar, focus outlines are white.
   - `.page` has padding `24px 28px 32px`. **Inside `.app-shell` (both workspaces) every page is full width** (`max-width: none`, no centring; the user's request, Oct 2026), including `.page--narrow` and `.page--form`. Outside the app shell, `.page` keeps its 1320px cap.
-  - The only width breakpoints are on the Landing page.
+  - **Phones (added Oct 30, 2026, the user chose a menu button):** below 900px the sidebar becomes a slide-in panel opened by the ☰ `.topbar__menu` button (`AppShell` state; `TopBar` `leading` prop), with a scrim; tapping a page, the scrim or Escape closes it. Docs/Support hide below 900px and the portal pill below 600px. Page grids collapse (search bar 2 columns, stat cards 2 across, forms 1 column) and the requirements and search-history tables become stacked cards below 700px. The phone rules sit at the end of `layout.css`, `BiPages.css`, `ClientPages.css` and `RequirementsTable.css`. Desktop is unchanged.
 - **Buttons:** `.btn` is 38px tall with a 1px border.
   - `--primary`: carbon.
   - `--secondary`: white, border-strong; hover adds a carbon border.

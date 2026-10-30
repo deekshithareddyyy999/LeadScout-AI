@@ -4,7 +4,8 @@
 --
 -- Security model: Row Level Security is ON for every table with NO policies, so the public
 -- anon/publishable key can read or write nothing. Only the backend, using the secret
--- (service_role) key, can access these tables.
+-- (service_role) key, c
+an access these tables.
 
 -- ---------- Accounts ----------
 -- One account per email; `domain` is the workspace it belongs to ('bi' = Seeker).

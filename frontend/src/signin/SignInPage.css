@@ -35,6 +35,7 @@
 
 .signin__back {
   display: inline-flex;
+  white-space: nowrap;
   align-items: center;
   gap: 6px;
   color: rgba(255, 255, 255, 0.85);

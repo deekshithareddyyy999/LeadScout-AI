@@ -907,3 +907,108 @@
 .signin__brand .brand {
   --radar-size: 36px;
 }
+
+/* ---------- Phones and small tablets (the user's request, Oct 2026) ----------
+   Below 900px the sidebar becomes a slide-in panel opened by the ☰ button in the top bar (AppShell.tsx),
+   so pages get the full screen width. Wide screens are unchanged: .topbar__menu and the scrim stay hidden. */
+.topbar__menu {
+  display: none;
+}
+
+.app-shell__scrim {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .app-shell .topbar {
+    padding: 0 16px 0 10px;
+  }
+
+  .app-shell .topbar__left {
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .topbar__menu {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+  }
+
+  .topbar__menu:hover {
+    background: var(--color-surface-muted);
+  }
+
+  /* Docs and Support are placeholders; the avatar (profile) stays. */
+  .app-shell .topbar__link {
+    display: none;
+  }
+
+  .app-shell .sidebar {
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    width: min(280px, 85vw);
+    overflow-y: auto;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 200ms ease, visibility 0s linear 200ms;
+  }
+
+  .app-shell .sidebar--open {
+    transform: none;
+    visibility: visible;
+    transition: transform 200ms ease;
+  }
+
+  .app-shell__scrim {
+    display: block;
+    position: fixed;
+    inset: 64px 0 0;
+    z-index: 25;
+    background: rgba(20, 22, 24, 0.4);
+  }
+
+  .app-shell .page {
+    padding: 18px 16px 28px;
+  }
+
+  .app-shell .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .app-shell .page-title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* The workspace label ("Seeker Workspace") doesn't fit beside the logo on a phone. */
+  .app-shell .topbar__left > .pill {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell .sidebar,
+  .app-shell .sidebar--open {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Header labels keep their own width when the header stacks. */
+  .app-shell .page-header > .pill,
+  .app-shell .page-header > div > .pill {
+    align-self: flex-start;
+  }
+}

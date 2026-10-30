@@ -214,3 +214,48 @@
   font-size: 12.5px;
   font-weight: 500;
 }
+
+/* ---------- Phones: controls wrap and each requirement becomes a stacked card ---------- */
+
+@media (max-width: 900px) {
+  .req-table__toolbar,
+  .req-table__controls,
+  .req-table__meta {
+    flex-wrap: wrap;
+  }
+
+  .req-table__meta {
+    gap: 6px 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .req-table .table thead {
+    display: none;
+  }
+
+  .req-table .table,
+  .req-table .table tbody {
+    display: block;
+  }
+
+  .req-table .table tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px 16px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .req-table .table td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+
+  .req-table .table td:first-child,
+  .req-table .table td:last-child {
+    flex-basis: 100%;
+  }
+}
