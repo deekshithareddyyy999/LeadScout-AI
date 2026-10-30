@@ -64,9 +64,14 @@ app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ error: "server-error", message: "Something went wrong on the server." });
 });
 
-app.listen(config.port, () => {
-  const status = Object.entries(integrations())
-    .map(([name, on]) => `${name}: ${on ? "configured" : "not set"}`)
-    .join(", ");
-  console.log(`LeadScout API listening on http://localhost:${config.port} (${status}, jwt secret: ${config.jwtSecret ? "set" : "not set"})`);
-});
+// On Vercel the exported app runs as a serverless function; locally it listens on a port.
+if (!process.env.VERCEL) {
+  app.listen(config.port, () => {
+    const status = Object.entries(integrations())
+      .map(([name, on]) => `${name}: ${on ? "configured" : "not set"}`)
+      .join(", ");
+    console.log(`LeadScout API listening on http://localhost:${config.port} (${status}, jwt secret: ${config.jwtSecret ? "set" : "not set"})`);
+  });
+}
+
+export default app;
